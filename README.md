@@ -14,6 +14,10 @@ export FLASK_APP=hello-world.py
 or in Windows PowerShell
 ```bash
 $env:FLASK_APP="hello-world.py"
+```
+
+and run
+```bash
 python -m flask run
 ```
 
