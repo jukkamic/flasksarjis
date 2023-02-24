@@ -1,5 +1,10 @@
 # SARJIS WITH FLASK
 
+**Prerequisites**
+
+Have Python installed and your virtualenv activated
+
+*Visual Studio Code:* **Ctrl + Shift + P** and type *python select interpreter* to select your virtualenv interpreter.
 
 **Install**
 ```bash
@@ -9,10 +14,7 @@ pip install -r requirements.txt
 set the environment variable
 ```bash
 export FLASK_APP=hello-world.py
-```
-
-or in Windows PowerShell
-```bash
+# In Windows PowerShell use
 $env:FLASK_APP="hello-world.py"
 ```
 

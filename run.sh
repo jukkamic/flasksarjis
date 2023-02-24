@@ -1,3 +1,3 @@
 #!/bin/bash
-export FLASK_APP=hello-world.py
+export FLASK_APP=application/hello-flask.py
 python -m flask run
