@@ -13,4 +13,4 @@ ENV FLASK_ENV=development
 
 EXPOSE 80
 
-CMD ["flask", "run", "--host=0.0.0.0", "--port=80"]
+CMD ["flask", "run", "--port=80"]
