@@ -13,9 +13,9 @@ pip install -r requirements.txt
 
 set the environment variable
 ```bash
-export FLASK_APP=hello-world.py
+export FLASK_APP=hello-flask.py
 # In Windows PowerShell use
-$env:FLASK_APP="hello-world.py"
+$env:FLASK_APP="application/hello-flask.py"
 ```
 
 and run
