@@ -9,8 +9,8 @@ RUN pip install -r requirements.txt
 COPY application application
 
 ENV FLASK_APP=application/hello-flask.py
-ENV FLASK_ENV=development
+ENV FLASK_DEBUG=false
 
 EXPOSE 80
 
-CMD ["flask", "run", "--port=80"]
+CMD ["flask", "run", "--host=0.0.0.0", "--port=80"]
