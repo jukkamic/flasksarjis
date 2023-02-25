@@ -1,0 +1,9 @@
+version: 0.0
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: arn:aws:ecs:eu-west-1:634129605042:task-definition/taskdefinitionfamilysarjis:2
+        LoadBalancerInfo:
+          ContainerName: "flasksarjis"
+          ContainerPort: 80
