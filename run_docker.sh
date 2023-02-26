@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # Run the Docker container
-#docker run -p 5000:5000 vvarimo/micronode
+docker run -p 80:80 ecr-sarjis-repo
