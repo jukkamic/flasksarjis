@@ -25,4 +25,19 @@ python -m flask run
 
 (Optional: Set the environment variable FLASK_ENV for development or production environment)
 
+**Docker and AWS**
+
+Deploy commands can be found at *AWS Elastic Container Registry - Repositories - Images - View Push Commands* 
+```bash
+aws ecr get-login-password | docker login --username AWS --password-stdin 634129605042.dkr.ecr.eu-west-1.amazonaws.com
+```
+
+```bash
+docker build -t ecr-sarjis-repo .
+
+docker tag ecr-sarjis-repo:latest 634129605042.dkr.ecr.eu-west-1.amazonaws.com/ecr-sarjis-repo:latest
+
+docker push 634129605042.dkr.ecr.eu-west-1.amazonaws.com/ecr-sarjis-repo:latest
+```
+
 
