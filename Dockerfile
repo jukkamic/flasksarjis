@@ -13,4 +13,4 @@ ENV FLASK_DEBUG=false
 
 EXPOSE 80
 
-CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0", "--port=80"]
+CMD ["xpython3", "-m", "flask", "run", "--host=0.0.0.0", "--port=80"]
