@@ -29,11 +29,18 @@ phases:
       - docker build -t $SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG .
       - docker tag $SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG      
 
+      - apt-get install jq -y
+      - ContainerName="ecr-sarjis-repo"
+      - ImageURI=$(cat imageDetail.json | jq -r '.ImageURI')
+      - printf '[{"name":"CONTAINER_NAME","imageUri":"IMAGE_URI"}]' > imagedefinitions.json
+      - sed -i -e "s|CONTAINER_NAME|$ContainerName|g" imagedefinitions.json
+      - sed -i -e "s|IMAGE_URI|$ImageURI|g" imagedefinitions.json
+      - cat imagedefinitions.json
+
   post_build:
     commands:
       - echo Pushing the Docker image...
       - docker push $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG
-      #- docker push 634129605042.dkr.ecr.eu-west-1.amazonaws.com/ecr-sarjis-repo:latest
 
 artifacts:
     files:
