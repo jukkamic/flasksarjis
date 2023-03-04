@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker stop ecr-sarjis-repo:latest
+docker ps -q --filter ancestor="ecr-sarjis-repo" | xargs docker stop
