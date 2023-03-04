@@ -20,7 +20,6 @@ phases:
   pre_build:
     commands:
       - aws ecr get-login-password --region $SARJIS_REGION | docker login --username AWS --password-stdin $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com
-      - IMAGE_URI=$ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG  
 
   build:
     commands:
@@ -34,7 +33,8 @@ phases:
 #      - ContainerName="ecr-sarjis-repo"
 #      - ImageURI=$(cat imageDetail.json | jq -r '.ImageURI')
       # - cat imageDetail.json
-      - printf '[{"name":$SARJIS_REPO_NAME,"imageUri":$IMAGE_URI}]' > $CODEBUILD_SRC_DIR/imagedefinitions.json
+      - IMAGE_URI=$ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG  
+      - printf '[{"name":%s,"imageUri":%s}]' $SARJIS_REPO_NAME $IMAGE_URI > $CODEBUILD_SRC_DIR/imagedefinitions.json
 #      - sed -i -e "s|CONTAINER_NAME|$ContainerName|g" imagedefinitions.json
 #      - sed -i -e "s|IMAGE_URI|$ImageURI|g" imagedefinitions.json
       - cat $CODEBUILD_SRC_DIR/imagedefinitions.json
