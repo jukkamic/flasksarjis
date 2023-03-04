@@ -20,7 +20,7 @@ phases:
   pre_build:
     commands:
       - aws ecr get-login-password --region $SARJIS_REGION | docker login --username AWS --password-stdin $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com
-      - IMAGE_URI=$SARJIS_IMAGE_TAG $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG  
+      - IMAGE_URI=$ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG  
 
   build:
     commands:
@@ -33,7 +33,7 @@ phases:
 #      - apt-get install jq -y
 #      - ContainerName="ecr-sarjis-repo"
 #      - ImageURI=$(cat imageDetail.json | jq -r '.ImageURI')
-      - printf '[{"name":$SARJIS_REPO_NAME,"imageUri":IMAGE_URI}]' > imagedefinitions.json
+      - printf '[{"name":$SARJIS_REPO_NAME,"imageUri":$IMAGE_URI}]' > imagedefinitions.json
 #      - sed -i -e "s|CONTAINER_NAME|$ContainerName|g" imagedefinitions.json
 #      - sed -i -e "s|IMAGE_URI|$ImageURI|g" imagedefinitions.json
       - cat imagedefinitions.json
