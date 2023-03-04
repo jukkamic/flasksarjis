@@ -1,4 +1,4 @@
-FROM python:3.8-alpine
+FROM python:3.8-slim-buster
 
 WORKDIR /appplication
 
@@ -13,4 +13,5 @@ ENV FLASK_DEBUG=false
 
 EXPOSE 80
 
-CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0", "--port=80"]
+ENTRYPOINT ["python"]
+CMD ["./application/hello-flask.py"]
