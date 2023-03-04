@@ -2,12 +2,13 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      docker: 18
+    #runtime-versions:
+    #  docker: 18
     commands:
       # Install dependencies needed for running tests
       - pip install --upgrade pip
       - pip install -r requirements.txt
+      - sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
   pre_build:
     commands:
