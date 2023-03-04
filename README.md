@@ -49,7 +49,7 @@ docker push 634129605042.dkr.ecr.eu-west-1.amazonaws.com/ecr-sarjis-repo:latest
 **TIPS**
 
 ```bash
-aws ecs update-service --cluster DockerCluster --service DockerService --force-new-deployment
+aws ecs update-service --cluster MyDockerCluster --service MyDockerEcsService2 --force-new-deployment
 ```
 
 ```bash
