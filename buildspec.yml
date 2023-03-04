@@ -6,23 +6,30 @@ phases:
       docker: 18
     commands:
       # Install dependencies needed for running tests
-      #- pip install --upgrade pip
-      #- pip install -r requirements.txt
+      - pip install --upgrade pip
+      - pip install -r requirements.txt
 
   pre_build:
     commands:
+      - $(aws ecr get-login --no-include-email --region eu-west-1)
       # Discover and run unit tests. For more information, see <https://docs.djangoproject.com/en/2.0/topics/testing/overview/>
       #- python3 api/manage.py test
       # - aws cloudformation package --template template.yml --s3-bucket $S3_BUCKET --output-template-file template-export.yml
 
-  post_build:
+  build:
     commands:
       # Do not remove this statement. This command is required for AWS CodeStar projects.
       # Update the AWS Partition, AWS Region, account ID and project ID in the project ARN on template-configuration.json file so AWS CloudFormation can tag project resources.
-      # - source run.sh
-      # - sed -i.bak 's/\$PARTITION\$/'${PARTITION}'/g;s/\$AWS_REGION\$/'${AWS_REGION}'/g;s/\$ACCOUNT_ID\$/'${ACCOUNT_ID}'/g;s/\$PROJECT_ID\$/'${PROJECT_ID}'/g' template-configuration.json
+      - docker build -t ecr-sarjis-repo .
+      - docker tag ecr-sarjis-repo:latest 634129605042.dkr.ecr.eu-west-1.amazonaws.com/ecr-sarjis-repo:latest
+      - 
+      #- sed -i.bak 's/\$PARTITION\$/'${PARTITION}'/g;s/\$AWS_REGION\$/'${AWS_REGION}'/g;s/\$ACCOUNT_ID\$/'${ACCOUNT_ID}'/g;s/\$PROJECT_ID\$/'${PROJECT_ID}'/g' template-configuration.json
 
-artifacts:
-  files:
-    - template-export.yml
-    - template-configuration.json
+  post_build:
+    commands:
+      - docker push 634129605042.dkr.ecr.eu-west-1.amazonaws.com/ecr-sarjis-repo:latest
+
+#artifacts:
+#  files:
+#    - template-export.yml
+#    - template-configuration.json
