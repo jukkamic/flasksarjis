@@ -13,7 +13,7 @@ phases:
     commands:
       # Install dependencies needed for running tests
       # - pip install --upgrade pip
-      - pip install -r requirements.txt
+      # - pip install -r requirements.txt
       # - sudo apt-get update
       # - sudo apt-get install docker.io -y
 
@@ -33,7 +33,7 @@ phases:
 #      - apt-get install jq -y
 #      - ContainerName="ecr-sarjis-repo"
 #      - ImageURI=$(cat imageDetail.json | jq -r '.ImageURI')
-      - cat imageDetail.json
+      # - cat imageDetail.json
       - printf '[{"name":$SARJIS_REPO_NAME,"imageUri":$IMAGE_URI}]' > $CODEBUILD_SRC_DIR/imagedefinitions.json
 #      - sed -i -e "s|CONTAINER_NAME|$ContainerName|g" imagedefinitions.json
 #      - sed -i -e "s|IMAGE_URI|$ImageURI|g" imagedefinitions.json
