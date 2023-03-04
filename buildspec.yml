@@ -16,26 +16,18 @@ phases:
       - pip install -r requirements.txt
       - sudo apt-get update
       - sudo apt-get install docker.io -y
-      #- sudo systemctl start docker
 
   pre_build:
     commands:
       - aws ecr get-login-password --region $SARJIS_REGION | docker login --username AWS --password-stdin $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com
 
-      # Discover and run unit tests. For more information, see <https://docs.djangoproject.com/en/2.0/topics/testing/overview/>
-      #- python3 api/manage.py test
-      # - aws cloudformation package --template template.yml --s3-bucket $S3_BUCKET --output-template-file template-export.yml
-
   build:
     commands:
       # Do not remove this statement. This command is required for AWS CodeStar projects.
       # Update the AWS Partition, AWS Region, account ID and project ID in the project ARN on template-configuration.json file so AWS CloudFormation can tag project resources.
+     #- sed -i.bak 's/\$PARTITION\$/'${PARTITION}'/g;s/\$AWS_REGION\$/'${AWS_REGION}'/g;s/\$ACCOUNT_ID\$/'${ACCOUNT_ID}'/g;s/\$PROJECT_ID\$/'${PROJECT_ID}'/g' template-configuration.json
       - docker build -t $SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG .
       - docker tag $SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG      
-      #- docker build -t ecr-sarjis-repo .
-      #- docker tag ecr-sarjis-repo:latest 634129605042.dkr.ecr.eu-west-1.amazonaws.com/ecr-sarjis-repo:latest
-      - 
-      #- sed -i.bak 's/\$PARTITION\$/'${PARTITION}'/g;s/\$AWS_REGION\$/'${AWS_REGION}'/g;s/\$ACCOUNT_ID\$/'${ACCOUNT_ID}'/g;s/\$PROJECT_ID\$/'${PROJECT_ID}'/g' template-configuration.json
 
   post_build:
     commands:
@@ -43,7 +35,6 @@ phases:
       - docker push $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG
       #- docker push 634129605042.dkr.ecr.eu-west-1.amazonaws.com/ecr-sarjis-repo:latest
 
-#artifacts:
-#  files:
-#    - template-export.yml
-#    - template-configuration.json
+artifacts:
+    files:
+        - imagedefinitions.json
