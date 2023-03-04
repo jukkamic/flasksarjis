@@ -8,14 +8,14 @@ env:
 
 phases:
   install:
-    #runtime-versions:
-    #  docker: 18
+    runtime-versions:
+      docker: 18
     commands:
       # Install dependencies needed for running tests
-      - pip install --upgrade pip
+      # - pip install --upgrade pip
       - pip install -r requirements.txt
-      - sudo apt-get update
-      - sudo apt-get install docker.io -y
+      # - sudo apt-get update
+      # - sudo apt-get install docker.io -y
 
   pre_build:
     commands:
