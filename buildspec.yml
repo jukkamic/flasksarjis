@@ -44,8 +44,8 @@ phases:
       - echo Pushing the Docker image...
       - docker push $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG
 
-#artifacts:
-#    files:
-#        - imagedefinitions.json
-#    discard-paths: yes
+artifacts:
+    files:
+        - imagedefinitions.json
+    discard-paths: yes
 
