@@ -46,4 +46,4 @@ phases:
 
 artifacts:
     files:
-        - $CODEBUILD_SRC_DIR/imagedefinitions.json
+        - imagedefinitions.json
