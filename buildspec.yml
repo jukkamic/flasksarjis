@@ -41,7 +41,7 @@ phases:
       - echo Pushing the Docker image...
       - docker push $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG
       - IMAGE_URI=$ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG  
-      - printf '[{"name":%s,"imageUri":%s}]' $SARJIS_REPO_NAME $IMAGE_URI > imagedefinitions.json
+      - printf '[{"name":"%s","imageUri":"%s"}]' $SARJIS_REPO_NAME $IMAGE_URI > imagedefinitions.json
       - cat imagedefinitions.json
 
 artifacts:
