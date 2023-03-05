@@ -56,5 +56,3 @@ aws ecs update-service --cluster MyDockerCluster --service MyDockerEcsService2 -
 pip install pip-check-reqs
 ```
 
-
-
