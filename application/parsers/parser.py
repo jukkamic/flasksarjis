@@ -1,4 +1,3 @@
-from ..models import Comic
 import json
 
 class Parser():
