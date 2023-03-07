@@ -1,4 +1,5 @@
 version: 0.2
+
 env:
   parameter-store:
     SARJIS_REGION: "SARJIS_REGION"
@@ -12,11 +13,6 @@ phases:
     #runtime-versions:
     #  docker: 18
     commands:
-      # Install dependencies needed for running tests
-      # - pip install --upgrade pip
-      # - pip install -r requirements.txt
-      # - sudo apt-get update
-      # - sudo apt-get install docker.io -y
 
   pre_build:
     commands:
@@ -24,18 +20,8 @@ phases:
 
   build:
     commands:
-      # Do not remove this statement. This command is required for AWS CodeStar projects.
-      # Update the AWS Partition, AWS Region, account ID and project ID in the project ARN on template-configuration.json file so AWS CloudFormation can tag project resources.
-     #- sed -i.bak 's/\$PARTITION\$/'${PARTITION}'/g;s/\$AWS_REGION\$/'${AWS_REGION}'/g;s/\$ACCOUNT_ID\$/'${ACCOUNT_ID}'/g;s/\$PROJECT_ID\$/'${PROJECT_ID}'/g' template-configuration.json
       - docker build -t $SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG .
       - docker tag $SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG      
-
-#      - apt-get install jq -y
-#      - ContainerName="ecr-sarjis-repo"
-#      - ImageURI=$(cat imageDetail.json | jq -r '.ImageURI')
-#      - cat $CODEBUILD_SRC_DIR/imageDetail.json
-#      - sed -i -e "s|CONTAINER_NAME|$ContainerName|g" imagedefinitions.json
-#      - sed -i -e "s|IMAGE_URI|$ImageURI|g" imagedefinitions.json
 
   post_build:
     commands:
@@ -48,6 +34,4 @@ phases:
 artifacts:
   files:
     - imagedefinitions.json
-#    name: imagedefinitions.json
-#    discard-paths: yes
 

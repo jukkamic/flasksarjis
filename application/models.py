@@ -1,9 +1,5 @@
 from sqlobject import SQLObject, StringCol, IntCol, DateCol, sqlhub, connectionForURI
 
-# class JsonModel(object):
-#     def as_dict(self):
-#        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
-
 sqlhub.processConnection = connectionForURI('sqlite:///sarjis.db')
 
 class Comic(SQLObject):

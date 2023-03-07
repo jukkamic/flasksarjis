@@ -1,15 +1,8 @@
 # Sqlite3 database
 sarjis.db
-api/db.sqlite3
-sarjis.code-workspace
-sarjis.sock
 
 # Logs
-api/*.log
 *.log
-
-# cache
-django_cache/
 
 # images
 images/
