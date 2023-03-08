@@ -1,10 +1,11 @@
 from flask import jsonify, Flask
+from flask_cors import CORS
 from .parsers.parser import Parser
-from .config import Config
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object("application.config.Config")
+    CORS(app)
 
     @app.route('/')
     def index():

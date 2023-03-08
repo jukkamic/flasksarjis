@@ -1,0 +1,62 @@
+<div class="container"
+    style="background-color: rgb(245, 245, 245);
+    margin-bottom: 1em;">
+<div class="row justify-content-left">
+    <div class="col-12 col-md-11 offset-md-1">
+        <h3 *ngIf="comic.display_name">{{comic.display_name}}</h3>
+        <i *ngIf="comic.date_publish">{{comic.date_publish | date: 'dd.MM.yyyy'}}</i>
+        <b *ngIf="comic.title">{{comic.title}}</b>
+    </div>
+</div>    
+<div class="row">
+    <div class="col-12 col-md-1 d-grid gap-1">
+        <button *ngIf="listView && comic.prev_id; else detailsView" 
+            type="button" 
+            (click)="getComic(comic.prev_id)"
+            class="btn btn-outline-dark"
+            style="border-color:transparent;"><h3>&laquo;</h3></button>
+        <ng-template #detailsView>
+            <button 
+            *ngIf="comic.prev_id" type="button" 
+            routerLink="/sarjis/{{comic.prev_id}}"
+            class="btn btn-outline-dark"
+            style="border-color:transparent;"><h3>&laquo;</h3></button>
+        </ng-template>
+    </div>
+    <div class="col-12 col-md-10">
+        <img routerLink="/sarjis/{{comic.id}}" 
+            *ngIf="comic.img_file" 
+            src="{{ImageFilePath}}/{{comic.img_file}}" 
+            title="{{comic.alt}}" 
+            class="img-fluid"
+            style="cursor: pointer"/>
+    </div>
+    <div class="col-12 col-md-1 d-grid gap-1">
+        <button *ngIf="listView && comic.next_id; else detailsNextView"
+            type="button" 
+            (click)="getComic(comic.next_id)"
+            class="btn btn-outline-dark btn-sm"
+            style="border-color:transparent;"><h3>&raquo;</h3></button>
+        <ng-template #detailsNextView>
+            <button 
+            *ngIf="comic.next_id" type="button" 
+            routerLink="/sarjis/{{comic.next_id}}"
+            class="btn btn-outline-dark"
+            style="border-color:transparent;"><h3>&raquo;</h3></button>
+        </ng-template>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-md-11 offset-md-1">
+        <a target="_blank" 
+            *ngIf="comic.perm_link.indexOf('http')==0; else combineUrl" 
+            href="{{comic.perm_link}}"
+            style="color: #212529;">{{comic.display_source}}</a>
+        <ng-template #combineUrl>
+            <a target="_blank" 
+                href="http://{{comic.display_source}}{{comic.perm_link}}"
+                style="color: #212529;">{{comic.display_source}}</a>
+        </ng-template>
+    </div>
+</div>
+</div>

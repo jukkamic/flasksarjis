@@ -1,0 +1,45 @@
+<div
+    class="container-md justify-content-center" 
+    style="background-color: rgb(235, 235, 235);">
+    <div class="row">
+        <div class="col-2 dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Menu
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#aboutModal">About</a>
+              <a class="dropdown-item" href="http://www.kotkis.fi/coder" target="_blank">GET /coder</a>
+            </div>
+          </div>
+        <div routerLink="/" class="linkheader col-8 text-center align-content-middle">
+            <h2>Sarjis~Kotkis</h2>
+        </div>
+    </div>
+
+    <!-- Modal -->
+<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="aboutModalLabel">About Sarjis</h5>
+      </div>
+      <div class="modal-body">
+        <blockquote>Sarjis is your most important meal of the day.</blockquote> -Hire Me
+        <hr width="100%" />
+
+        <p>See <a href="https://github.com/jukkamic/sarjis" target="_blank">Github</a> for source code.</p>
+
+        <p>I created this site to study coding with Django and Angular.
+        As a Java developer I have little or no background in any of these techs. 
+        The motivation is to develop my full stack skills for both professional and hobby purposes.
+        </p>
+
+        <p><b>Looking for a developer?</b> Let's have a chat!</p>
+
+        <p><i>jukkamic@gmail.com</i></p>
+      </div>
+    </div>
+  </div>
+</div>
+    <router-outlet></router-outlet>
+</div>

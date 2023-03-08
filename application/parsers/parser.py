@@ -5,46 +5,55 @@ class Parser():
     comicSources:any = [
             {
                 "name": "fingerpori",
+                "displayName": "Fingerpori",
                 "title": "Fingerpori",
                 "parser": "HsParser"
             },
             {
                 "name": "vw",
+                "displayName": "Viivi ja Wagner",
                 "title": "Viivi ja Wagner",
                 "parser": "HsParser"
             },
             {
                 "name": "luonto",
+                "displayName": "Kamala luonto",
                 "title": "Kamala luonto",
                 "parser": "LuontoParser"
             },
             {
                 "name": "dilbert",
+                "displayName": "Dilbert",
                 "title": "",
                 "parser": "DilbertParser"
             },
             {
                 "name": "xkcd",
+                "displayName": "xkcd",
                 "title": "",
                 "parser": "XkcdParser"
             },
             {
                 "name": "smbc",
+                "displayName": "Saturday Morning Breakfast Cereal",
                 "title": "",
                 "parser": "SmbcParser"
             },
             {
                 "name": "fokit",
+                "displayName": "Fok_It",
                 "title": "Fok_It",
                 "parser": "HsParser"
             },
             {
                 "name": "redmeat",
+                "displayName": "Red Meat",
                 "title": "Red Meat",
                 "parser": "RedmeatParser"
             },
             {
                 "name": "pbf",
+                "displayName": "The Perry Bible Fellowship",
                 "title": "",
                 "parser": "PbfParser"
             },
@@ -70,5 +79,5 @@ class Parser():
     def getComicNames():
         names = []
         for source in Parser.comicSources:
-            names.append({'name': source['name']})
+            names.append({'name': source['name'], 'displayName': source['displayName']})
         return names
