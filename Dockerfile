@@ -8,7 +8,7 @@ RUN pip install -r requirements.txt
 
 COPY application application
 
-EXPOSE 80
+EXPOSE 8000
 
 ENTRYPOINT ["gunicorn"]
-CMD ["-w", "3", "-b", "0.0.0.0:80", "application.app:create_app()"]
+CMD ["-w", "3", "-b", "0.0.0.0:8000", "application.app:create_app()"]
