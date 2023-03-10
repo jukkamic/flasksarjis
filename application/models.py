@@ -4,10 +4,12 @@ from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 from typing import Optional
 from sqlalchemy.orm import DeclarativeBase
+from dataclasses import dataclass
 
 class Base(DeclarativeBase):
     pass
 
+@dataclass
 class Comic(Base):
     __tablename__ = 'comics'
 
@@ -28,6 +30,9 @@ class Comic(Base):
 
     def __repr__(self) -> str:
         return f"User(id={self.id!r}, name={self.name!r}, fullname={self.display_name!r})"
+    
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
     
 
 

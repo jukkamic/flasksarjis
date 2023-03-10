@@ -2,13 +2,13 @@ from flask import jsonify, Flask
 from flask_cors import CORS
 from .parsers.parser import Parser
 from .models import Comic
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy import create_engine
 from .models import Base
 
 engine = create_engine('postgresql://postgres:secret@database', echo=True)
-
 Base.metadata.create_all(engine)
+Session = sessionmaker(bind=engine)
 
 def create_app():
     app = Flask(__name__)
@@ -21,11 +21,14 @@ def create_app():
 
     @app.route('/list-names', methods = ['GET'])
     def getNames():    
-        return jsonify(Parser.getComicNames())
+        session = Session()
+        comics = session.query(Comic).all()
+        return jsonify(comics)
 
     @app.route('/create/<name>', methods = ['GET'])
     def createComic(name:str):
-        with Session(engine) as session:    
+        session = Session()
+        with session:    
             comic = Comic(name=name, display_name="testing name")
             session.add(comic)
             session.commit()
