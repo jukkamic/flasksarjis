@@ -1,22 +1,28 @@
 version: '3.1'
 
 services:
+  database:
+    image: postgres:alpine3.17
+    container_name: database
+    environment:
+      - PGUSER=postgres
+      - POSTGRES_USER=postgres
+      - PGDATABASE=sarjis
+      - POSTGRES_PASSWORD=secret
+    networks:
+      - sarjisnetwork
+
   sarjis:
     build:
       context: ./
-      #dockerfile: Dockerfile
+      dockerfile: Dockerfile
     container_name: sarjis
-    volumes:
-      - ./:/var/www/
-    ports:
-      - 8000:8000
-    # command: gunicorn --bind 0.0.0.0:8000 --workers 3 "application.app:create_app()"
     networks:
       sarjisnetwork:
         aliases:
           - sarjis_backend
     depends_on:
-      - mariadb
+      - database
 
   nginx:
     image: nginx:1.23.3
@@ -28,16 +34,8 @@ services:
       - 80:80
     networks:
       - sarjisnetwork
-
-  mariadb:
-    image: mariadb:10.7.8
-    container_name: mariadb
-    environment:
-      - MARIADB_ROOT_PASSWORD="mariarootp"
-    ports:
-      - 3306:3306
-    networks:
-      - sarjisnetwork
+    depends_on:
+      - sarjis
 
 networks:
-  sarjisnetwork:
+  sarjisnetwork: {}

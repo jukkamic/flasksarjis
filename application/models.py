@@ -1,10 +1,9 @@
 from typing import Optional
 from sqlalchemy import String
-from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 from typing import Optional
-from sqlalchemy import create_engine
+from sqlalchemy.orm import DeclarativeBase
 
 class Base(DeclarativeBase):
     pass
@@ -30,8 +29,5 @@ class Comic(Base):
     def __repr__(self) -> str:
         return f"User(id={self.id!r}, name={self.name!r}, fullname={self.display_name!r})"
     
-engine = create_engine('mysql://root:mariarootp@localhost/sarjis', echo=True)
-
-Base.metadata.create_all(engine)
 
 
