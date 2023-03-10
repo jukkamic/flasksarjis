@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # Run the Docker container
-docker run -p 8000:8000 ecr-sarjis-repo:latest
+docker run -d --name=sarjis --network=sarjisnet --network-alias=sarjis_backend ecr-sarjis-repo:latest
