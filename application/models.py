@@ -30,7 +30,7 @@ class Comic(Base):
     def __repr__(self) -> str:
         return f"User(id={self.id!r}, name={self.name!r}, fullname={self.display_name!r})"
     
-engine = create_engine('sqlite://', echo=True)
+engine = create_engine('mysql://root:mariarootp@localhost/sarjis', echo=True)
 
 Base.metadata.create_all(engine)
 

@@ -1,0 +1,43 @@
+version: '3.1'
+
+services:
+  sarjis:
+    build:
+      context: ./
+      #dockerfile: Dockerfile
+    container_name: sarjis
+    volumes:
+      - ./:/var/www/
+    ports:
+      - 8000:8000
+    # command: gunicorn --bind 0.0.0.0:8000 --workers 3 "application.app:create_app()"
+    networks:
+      sarjisnetwork:
+        aliases:
+          - sarjis_backend
+    depends_on:
+      - mariadb
+
+  nginx:
+    image: nginx:1.23.3
+    container_name: nginx
+    volumes:
+      - ./:/var/www/
+      - ./nginx-default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 80:80
+    networks:
+      - sarjisnetwork
+
+  mariadb:
+    image: mariadb:10.7.8
+    container_name: mariadb
+    environment:
+      - MARIADB_ROOT_PASSWORD="mariarootp"
+    ports:
+      - 3306:3306
+    networks:
+      - sarjisnetwork
+
+networks:
+  sarjisnetwork:
