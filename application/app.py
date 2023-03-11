@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy import create_engine
 from .models import Base
 
-engine = create_engine('postgresql://postgres:secret@database-5432-tcp', echo=True)
+engine = create_engine('postgresql://postgres:secret@172.31.41.201', echo=True)
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 
