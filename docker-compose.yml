@@ -26,7 +26,7 @@ services:
     container_name: nginx
     volumes:
       - ./:/var/www/
-      - ./httpserver/nginx-default.conf:/etc/nginx/conf.d/default.conf
+      - ./web/nginx-default.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 80:80
     networks:
