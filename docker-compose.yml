@@ -5,16 +5,13 @@ services:
     image: postgres:alpine3.17
     container_name: database
     environment:
-      - PGUSER=postgres
-      - POSTGRES_USER=postgres
-      - PGDATABASE=sarjis
       - POSTGRES_PASSWORD=secret
     networks:
       - sarjisnetwork
 
   sarjis:
     build:
-      context: ./
+      context: ./service
       dockerfile: Dockerfile
     container_name: sarjis
     networks:
