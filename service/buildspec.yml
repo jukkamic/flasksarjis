@@ -4,9 +4,9 @@ env:
   parameter-store:
     SARJIS_REGION: "SARJIS_REGION"
     ADMIN_ACCOUNT_ID: "ADMIN_ACCOUNT_ID"
-    SARJIS_REPO_NAME: "SARJIS_REPO_NAME"
     SARJIS_IMAGE_TAG: "SARJIS_IMAGE_TAG"
-    SARJIS_CONTAINER_NAME: "SARJIS_CONTAINER_NAME"
+    SERVICE_REPO: "SERVICE_REPO"
+    SERVICE_NAME: "SERVICE_NAME"
 
 phases:
   install:
@@ -20,15 +20,15 @@ phases:
 
   build:
     commands:
-      - docker build -t $SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG .
-      - docker tag $SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG      
+      - docker build -t $SERVICE_REPO:$SARJIS_IMAGE_TAG .
+      - docker tag $SERVICE_REPO:$SARJIS_IMAGE_TAG $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SERVICE_REPO:$SARJIS_IMAGE_TAG      
 
   post_build:
     commands:
       - echo Pushing the Docker image...
-      - docker push $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG
-      - IMAGE_URI=$ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SARJIS_REPO_NAME:$SARJIS_IMAGE_TAG  
-      - printf '[{"name":"%s","imageUri":"%s"}]' $SARJIS_CONTAINER_NAME $IMAGE_URI > imagedefinitions.json
+      - docker push $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SERVICE_REPO:$SARJIS_IMAGE_TAG
+      - IMAGE_URI=$ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SERVICE_REPO:$SARJIS_IMAGE_TAG  
+      - printf '[{"name":"%s","imageUri":"%s"}]' $SERVICE_NAME $IMAGE_URI > imagedefinitions.json
       - cat imagedefinitions.json
 
 artifacts:

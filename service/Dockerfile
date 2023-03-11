@@ -3,6 +3,7 @@ FROM twobulls/gunicorn-bootstrap
 WORKDIR /appplication
 
 COPY requirements.txt .
+COPY buildspec.yml .
 
 RUN pip install -r requirements.txt
 
