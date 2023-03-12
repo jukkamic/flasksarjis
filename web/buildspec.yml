@@ -1,0 +1,37 @@
+version: 0.2
+
+env:
+  parameter-store:
+    SARJIS_REGION: "SARJIS_REGION"
+    ADMIN_ACCOUNT_ID: "ADMIN_ACCOUNT_ID"
+    SARJIS_IMAGE_TAG: "SARJIS_IMAGE_TAG"
+    SERVICE_REPO: "SERVICE_REPO_WEB"
+    SERVICE_NAME: "SERVICE_NAME_WEB"
+
+phases:
+  install:
+    #runtime-versions:
+    #  docker: 18
+    commands:
+
+  pre_build:
+    commands:
+      - aws ecr get-login-password --region $SARJIS_REGION | docker login --username AWS --password-stdin $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com
+
+  build:
+    commands:
+      - docker build -t $SERVICE_REPO:$SARJIS_IMAGE_TAG .
+      - docker tag $SERVICE_REPO:$SARJIS_IMAGE_TAG $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SERVICE_REPO:$SARJIS_IMAGE_TAG      
+
+  post_build:
+    commands:
+      - echo Pushing the Docker image...
+      - docker push $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SERVICE_REPO:$SARJIS_IMAGE_TAG
+      - IMAGE_URI=$ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SERVICE_REPO:$SARJIS_IMAGE_TAG  
+      - printf '[{"name":"%s","imageUri":"%s"}]' $SERVICE_NAME $IMAGE_URI > imagedefinitions.json
+      - cat imagedefinitions.json
+
+artifacts:
+  files:
+    - imagedefinitions.json
+

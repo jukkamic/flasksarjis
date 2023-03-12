@@ -5,9 +5,22 @@ from .models import Comic
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy import create_engine
 from .models import Base
+from time import sleep
 
-engine = create_engine('postgresql://postgres:secret@172.31.39.108', echo=True)
-Base.metadata.create_all(engine)
+engine = create_engine('postgresql://postgres:secret@localhost', echo=True)
+attempts = 0
+while (True):
+    try:
+        Base.metadata.create_all(engine)
+    except Exception as ex:
+        if attempts < 10:
+            attempts += 1
+            sleep_for = 2 * attempts
+            sleep(min(sleep_for, 50))
+            continue
+        else:
+            raise
+    break
 Session = sessionmaker(bind=engine)
 
 def create_app():
