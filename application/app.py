@@ -7,7 +7,7 @@ from sqlalchemy import create_engine
 from .models import Base
 from time import sleep
 
-engine = create_engine('postgresql://postgres:secret@localhost', echo=True)
+engine = create_engine('postgresql://postgres:secret@sarjis.azurewebsites.net', echo=True)
 attempts = 0
 while (True):
     try:

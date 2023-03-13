@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker run -d --network=sarjisnet --network-alias=database sarjis-db:latest
+docker run -itd --network=sarjisnet --network-alias=database sarjis-db:latest
 
