@@ -1,5 +1,23 @@
 class Config():
     FLASK_APP="application/app.py"
-    #MARIADB_CONFIG=""
-    #MARIADB_ROOT_PASSWORD="mariarootp"
-
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'file': {
+                'level': 'DEBUG',
+                'class': 'logging.FileHandler',
+                'filename': 'debug-sarjis.log',
+            },
+            'console': {
+                'class': 'logging.StreamHandler',
+            },
+        },
+        'loggers': {
+            'sarjis': {
+                'handlers': ['file','console'],
+                'level': 'DEBUG',
+                'propagate': True,
+            },
+        },
+    }

@@ -1,4 +1,4 @@
-from flask import jsonify, Flask
+from flask import jsonify, Flask, request
 from flask_cors import CORS
 from .parsers.parser import Parser
 from .models import Comic
@@ -6,8 +6,9 @@ from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy import create_engine
 from .models import Base
 from time import sleep
+from .views import get_comic
 
-engine = create_engine('postgresql://postgres:secret@sarjis.azurewebsites.net', echo=True)
+engine = create_engine('postgresql://postgres:secret@database', echo=True)
 attempts = 0
 while (True):
     try:
@@ -46,5 +47,11 @@ def create_app():
             session.add(comic)
             session.commit()
         return "Thanks a lot!"
+    
+    @app.route('/comics/id/<int:id>/', methods= ['GET'])
+    def getComic(id):
+        comic = get_comic(request, id)
+        return jsonify(comic)
+        
 
     return app

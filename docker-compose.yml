@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   database:
-    image: sarjisregistry.azurecr.io/sarjis-db:latest
+    image: sarjis-db:latest
     container_name: database
     environment:
       - POSTGRES_PASSWORD=secret
@@ -12,7 +12,7 @@ services:
       - sarjisnetwork
 
   sarjis:
-    image: sarjisregistry.azurecr.io/sarjis-service:latest
+    image: sarjis-service:latest
     # build:
     #   context: ./service
     #   dockerfile: Dockerfile
@@ -27,7 +27,7 @@ services:
       - database
 
   nginx:
-    image: sarjisregistry.azurecr.io/sarjis-web:latest
+    image: sarjis-web:latest
     container_name: nginx
     # volumes:
     #   - ./:/var/www/

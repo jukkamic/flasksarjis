@@ -17,17 +17,18 @@ phases:
       # - printf '[{"name":"%s","imageUri":"%s"}]' $SERVICE_NAME $IMAGE_URI > imagedefinitions.json
       # - cat imagedefinitions.json
 
-  # pre_build:
-  #   commands:
+  pre_build:
+    commands:
       # - aws ecr get-login-password --region $SARJIS_REGION | docker login --username AWS --password-stdin $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com
 
-  # build:
-  #   commands:
+  build:
+    commands:
+      - echo "Nothing in the build phase"
       # - docker build -t $SERVICE_REPO:$SARJIS_IMAGE_TAG .
       # - docker tag $SERVICE_REPO:$SARJIS_IMAGE_TAG $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SERVICE_REPO:$SARJIS_IMAGE_TAG      
 
-  # post_build:
-  #   commands:
+  post_build:
+    commands:
       # - echo Pushing the Docker image...
       # - docker push $ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SERVICE_REPO:$SARJIS_IMAGE_TAG
       - IMAGE_URI=$ADMIN_ACCOUNT_ID.dkr.ecr.$SARJIS_REGION.amazonaws.com/$SERVICE_REPO:$SARJIS_IMAGE_TAG  
