@@ -1,33 +1,31 @@
 from flask import jsonify, Flask, request
 from flask_cors import CORS
 from .parsers.parser import Parser
-from .models import Comic
-from sqlalchemy.orm import sessionmaker, Session
-from sqlalchemy import create_engine
-from .models import Base
-from time import sleep
-from .views import get_comic
+from flask_sqlalchemy import SQLAlchemy
 
-engine = create_engine('postgresql://postgres:secret@database', echo=True)
-attempts = 0
-while (True):
-    try:
-        Base.metadata.create_all(engine)
-    except Exception as ex:
-        if attempts < 10:
-            attempts += 1
-            sleep_for = 2 * attempts
-            sleep(min(sleep_for, 50))
-            continue
-        else:
-            raise
-    break
-Session = sessionmaker(bind=engine)
+db = SQLAlchemy()
+
+class Comic(db.Model):
+    __tablename__ = 'comics'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    display_name = db.Column(db.String(100))
+
+    def __repr__(self) -> str:
+        return f"User(id={self.id!r}, name={self.name!r}, fullname={self.display_name!r})"
+    
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object("application.config.Config")
     CORS(app)
+    db.init_app(app)
+    with app.app_context():
+        db.create_all()
 
     @app.route('/')
     def index():
@@ -35,23 +33,22 @@ def create_app():
 
     @app.route('/list-names', methods = ['GET'])
     def getNames():    
-        session = Session()
-        comics = session.query(Comic).all()
-        return jsonify(comics)
+        comics = db.session.execute(db.select(Comic)).scalars()
+        for comic in comics:
+            print( "comic " + comic.name)
+        return "Lots of them"
 
     @app.route('/create/<name>', methods = ['GET'])
     def createComic(name:str):
-        session = Session()
-        with session:    
-            comic = Comic(name=name, display_name="testing name")
-            session.add(comic)
-            session.commit()
+        comic = Comic(name=name, display_name="testing name")
+        db.session.add(comic)
+        db.session.commit()
         return "Thanks a lot!"
     
     @app.route('/comics/id/<int:id>/', methods= ['GET'])
     def getComic(id):
-        comic = get_comic(request, id)
+        comic = db.get(Comic, id)
         return jsonify(comic)
         
-
     return app
+

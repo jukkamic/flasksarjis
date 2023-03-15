@@ -1,5 +1,6 @@
 class Config():
     FLASK_APP="application/app.py"
+    SQLALCHEMY_DATABASE_URI="postgresql://postgres:secret@database"
     LOGGING = {
         'version': 1,
         'disable_existing_loggers': False,

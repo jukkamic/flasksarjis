@@ -1,21 +1,14 @@
-from typing import Optional
+from sqlalchemy import Column
+from sqlalchemy import Integer
 from sqlalchemy import String
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from typing import Optional
-from sqlalchemy.orm import DeclarativeBase
-from dataclasses import dataclass
 
-class Base(DeclarativeBase):
-    pass
-
-@dataclass
-class Comic(Base):
+class Comic():
     __tablename__ = 'comics'
 
-    id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String(100))
-    display_name: Mapped[Optional[str]] = mapped_column(String(100))
+    id = Column(Integer, primary_key=True)
+    name = Column(String(100), nullable=False)
+    display_name = Column(String(100))
+
     # display_source = StringCol()
     # date_publish = DateCol()
     # title = StringCol(notNone=True)
