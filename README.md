@@ -8,7 +8,8 @@ Have Python installed and your virtualenv activated
 
 For AWS deployment you will need to install AWS Cli.
 
-**Install and run localhost**
+## Install and run localhost
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -25,6 +26,18 @@ python -m flask run --host=localhost --port=8000
 ```
 
 (Optional: Set the environment variable FLASK_ENV for development or production environment)
+
+## Docker in localhost
+
+Build the UI
+
+ng build --configuration development
+
+Run the build scripts in **db/** and **web/** and run **build-service.sh** in project root.
+
+Run *docker-compose up* in project root.
+
+http://localhost/
 
 **Docker and AWS**
 
