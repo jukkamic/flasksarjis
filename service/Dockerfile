@@ -8,7 +8,6 @@ COPY service/buildspec.yml .
 RUN pip install -r requirements.txt
 
 COPY application application
-COPY service/buildspec.yml .
 
 EXPOSE 8000:8000
 
