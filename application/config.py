@@ -22,8 +22,13 @@ class Config:
             },
         },
         'loggers': {
+            'root': {
+                'handlers': ['console'],
+                'level': 'DEBUG',
+                'propagate': True,
+            },
             'sarjis': {
-                'handlers': ['file','console'],
+                'handlers': ['console'],
                 'level': 'DEBUG',
                 'propagate': True,
             },

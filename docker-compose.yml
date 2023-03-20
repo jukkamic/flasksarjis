@@ -23,6 +23,8 @@ services:
       context: .
       args:
         - SERVICE_PATH=service
+    volumes:
+      - ./application/static:/application/static
     container_name: sarjis
     ports:
       - 8000:8000
