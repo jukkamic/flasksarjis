@@ -1,5 +1,4 @@
 from .common import Common
-from bs4 import BeautifulSoup
 
 class HsParser():
     
@@ -8,7 +7,7 @@ class HsParser():
             path = "/sarjakuvat/"
         page_html = Common.fetchPage("www.hs.fi", path)
 
-        soup = BeautifulSoup(page_html, features="lxml")
+        soup = Common.getSoup(page_html)
 
         if path == "/sarjakuvat/":
             perm_link = getPermLinkFromHS(soup, comicTitle)

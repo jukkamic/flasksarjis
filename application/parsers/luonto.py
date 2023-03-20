@@ -1,8 +1,5 @@
 from .common import Common
-from bs4 import BeautifulSoup
 import logging
-
-log = logging.getLogger('sarjis')
 
 class LuontoParser:
 
@@ -14,7 +11,7 @@ class LuontoParser:
         # TODO: A plan for traversing comics back further than page 1.
         page_html = Common.fetchPage("www.ksml.fi", "/aihe/Kamala_luonto")
 
-        soup = BeautifulSoup(page_html, features="lxml")
+        soup = Common.getSoup(page_html)
 
         grid_column = soup.find("h1", text=title_in_html, attrs={'class': 'diks-title'}).find_parent("div")
 

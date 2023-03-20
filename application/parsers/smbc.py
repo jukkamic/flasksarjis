@@ -1,5 +1,4 @@
 from .common import Common
-from bs4 import BeautifulSoup
 
 class SmbcParser():
 
@@ -8,7 +7,7 @@ class SmbcParser():
             path = "/comic/" + path.split('/')[-1]
         page_html = Common.fetchPage("www.smbc-comics.com", path)
 
-        soup = BeautifulSoup(page_html, features="lxml")
+        soup = Common.getSoup(page_html)
 
         full_title = soup.find('title').contents[0]
         title = full_title[len("Saturday Morning Breakfast Cereal -"):]

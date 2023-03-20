@@ -1,5 +1,4 @@
 from .common import Common
-from bs4 import BeautifulSoup
 
 class PbfParser():
     
@@ -8,7 +7,7 @@ class PbfParser():
             path = "/comics/" + path.split("/")[-2] + "/"
         page_html = Common.fetchPage("pbfcomics.com", path)
 
-        soup = BeautifulSoup(page_html, features="lxml")
+        soup = Common.getSoup(page_html)
 
         nav_tag = soup.find("div", attrs={"id": "pbf-bottom-pagination"})
 

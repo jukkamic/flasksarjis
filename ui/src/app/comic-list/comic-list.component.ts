@@ -10,31 +10,18 @@ import { ComicService } from '../comic.service';
 export class ComicListComponent implements OnInit {
 
   all_comics: any = [];
-  comics: [{ name: any; display_name: any; index: any }] = [{ "name": "", "display_name": "", "index": 0 }];
+  comics: any = [];
   errors: any = [];
 
   constructor(private service: ComicService) {
-    var i: number = -1;
-    service.getAllNames().subscribe(
-      (data: any) => {
-        this.comics = data.List.map(
-          (comic: { name: any; displayName: any; }) => {
-            i++;
-            return JSON.parse('{"name":"' + comic.name + '", "display_name":"' + comic.displayName + '", "index":' + i + '}');
-          }
-        )
-      }
-    );
-    // this.comics.push({ "name": "fingerpori", display_name: "Fingerpori", index: 0 });
-    // this.comics.push({ "name": "vw", display_name: "Viivi ja Wagner", index: 1 });
-    // this.comics.push({ "name": "dilbert", display_name: "Dilbert", index: 2 });
-    // this.comics.push({ "name": "luonto", display_name: "Kamala luonto", index: 3 });
-    // this.comics.push({ "name": "xkcd", display_name: "Xkcd", index: 4 });
-    // this.comics.push({ "name": "smbc", display_name: "SMBC", index: 5 });
-    // this.comics.push({ "name": "fokit", display_name: "Fok_It", index: 6 });
-    // this.comics.push({ "name": "redmeat", display_name: "Red Meat", index: 7 });
-    // this.comics.push({ "name": "pbf", display_name: "Perry Bible Fellowship", index: 8 });
-    // this.comics.push({"name": "velho", display_name: "Velho", index:9});
+    this.comics.push({ "name": "fingerpori", display_name: "Fingerpori", index: 0 });
+    this.comics.push({ "name": "vw", display_name: "Viivi ja Wagner", index: 1 });
+    this.comics.push({ "name": "luonto", display_name: "Kamala luonto", index: 2 });
+    this.comics.push({ "name": "xkcd", display_name: "Xkcd", index: 3 });
+    this.comics.push({ "name": "smbc", display_name: "SMBC", index: 4 });
+    this.comics.push({ "name": "fokit", display_name: "Fok_It", index: 5 });
+    this.comics.push({ "name": "redmeat", display_name: "Red Meat", index: 6 });
+    this.comics.push({ "name": "pbf", display_name: "Perry Bible Fellowship", index: 7 });
   }
 
   ngOnInit(): void {

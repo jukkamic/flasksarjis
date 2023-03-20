@@ -1,12 +1,11 @@
 from .common import Common
-from bs4 import BeautifulSoup
 
 class CyanideParser():
     def parse(path, title_in_html=""):
         if path == "/":
             path = "/comics/latest/"
         page_html = Common.fetchPage("explosm.net", path)
-        soup = BeautifulSoup(page_html, features="lxml")
+        soup = Common.getSoup(page_html)
 
         if path == "/comics/latest/":
             link_element = soup.find("a", attrs={"id": "comic-social-link"})

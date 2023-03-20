@@ -1,14 +1,17 @@
-from django.conf import settings
+from application.config import Config
 import os
 import urllib.request
 import requests
+from bs4 import BeautifulSoup
 
 class Common():
 
     @staticmethod    
     def saveImage(img_url:str):
         img_file = img_url.split('/')[-1]
-        img_path = settings.MEDIA_ROOT
+        img_path = Config.IMAGE_PATH
+        if not os.path.exists(img_path):            
+            os.mkdir(img_path)
         img_full_path = os.path.join(img_path, img_file)
         if not os.path.isfile(img_full_path):
             urllib.request.urlretrieve(img_url, img_full_path)   
@@ -24,4 +27,7 @@ class Common():
         page_html:str = response.text
         return page_html
 
+    @staticmethod 
+    def getSoup(page_html):
+        return BeautifulSoup(page_html, features="html.parser")
 

@@ -1,7 +1,11 @@
 import uuid
+from pathlib import Path
+import os
 
 class Config:
     FLASK_APP="application/app.py"
+    BASE_DIR = Path(__file__).resolve().parent
+    IMAGE_PATH = os.path.join(BASE_DIR,"static/images")
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     LOGGING = {
@@ -28,7 +32,8 @@ class Config:
 
 class DevelopmentConfig(Config):
     SECRET_KEY='dev'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///sarjis.sqlite'
+#    SQLALCHEMY_DATABASE_URI = 'sqlite:///sarjis.sqlite'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
     MAX_CONTENT_LENGTH = 1 * 1000 * 1000
 
 class ProductionConfig(Config):

@@ -11,25 +11,25 @@ export class ComicService {
   readonly APIUrl = environment.api_url;
   readonly ImageUrl = environment.img_url;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http:HttpClient) { }
 
-  getComic(id: any): Observable<any> {
+  getComic(id:any):Observable<any> {
     return this.http.get<any>(this.APIUrl + "comics/id/" + id + "/");
   }
 
-  getLatestComic(name: string | null): Observable<any> {
+  getLatestComic(name:string | null):Observable<any> {
     return this.http.get<any>(this.APIUrl + "comics/name/" + name + "/").pipe(
       catchError(this.handleError));
   }
 
-  getAllLatestComics(): Observable<any[]> {
+  getAllLatestComics():Observable<any[]> {
     return this.http.get<any[]>(this.APIUrl + "comics/")
   }
 
-  getAllNames(): Observable<any[]> {
-    return this.http.get<any[]>(this.APIUrl + "list-names");
+  getAllNames():Observable<any[]> {
+    return this.http.get<any[]>(this.APIUrl + "list-names/");
   }
-
+  
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.

@@ -19,10 +19,9 @@ export FLASK_APP=application/app.py
 # In Windows PowerShell use
 $env:FLASK_APP="application/app.py"
 ```
-
 and run
 ```bash
-python -m flask run
+python -m flask run --host=localhost --port=8000
 ```
 
 (Optional: Set the environment variable FLASK_ENV for development or production environment)
