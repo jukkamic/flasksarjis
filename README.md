@@ -1,5 +1,12 @@
 # SARJIS WITH FLASK
 
+**TODO**
+
+- There is no dev or prod environments. The configuration is hardcoded into app.py (DevelopmentConfig)
+- docker-compose build does not work. Build scripts must be run individually for each container
+- Some comics get caught up in some errors
+- Set your specific AWS and Azure configurations in (env) config
+
 **Prerequisites**
 
 Have Python installed and your virtualenv activated
@@ -31,15 +38,19 @@ python -m flask run --host=localhost --port=8000
 
 Build the UI
 
+```bash
 ng build --configuration development
+```
 
-Run the build scripts in **db/** and **web/** and run **build-service.sh** in project root.
+Run the **build.sh** scripts in **db/** and **web/** and run **build-service.sh** in project root.
 
-Run *docker-compose up* in project root.
+Run **docker-compose up** in project root.
 
 http://localhost/
 
-**Docker and AWS**
+## Docker with AWS or Azure
+
+**AWS**
 
 Deploy commands can be found at *AWS Elastic Container Registry - Repositories - Images - View Push Commands* 
 
@@ -57,6 +68,10 @@ docker tag ecr-sarjis-repo:latest 634129605042.dkr.ecr.eu-west-1.amazonaws.com/e
 
 docker push 634129605042.dkr.ecr.eu-west-1.amazonaws.com/ecr-sarjis-repo:latest
 ```
+
+**Azure**
+
+All *build.sh* and *push.sh* scripts work with *az* parameter to build and deploy to Azure.
 
 **TIPS**
 
