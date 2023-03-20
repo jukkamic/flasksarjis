@@ -5,6 +5,9 @@ services:
     # image: sarjis-db:latest
     build:
       dockerfile: db/Dockerfile
+      context: .
+      args:
+        - DB_PATH=db
     container_name: database
     environment:
       - POSTGRES_PASSWORD=secret
@@ -17,6 +20,9 @@ services:
     # image: sarjis-service:latest
     build:
       dockerfile: service/Dockerfile
+      context: .
+      args:
+        - SERVICE_PATH=service
     container_name: sarjis
     ports:
       - 8000:8000
@@ -31,6 +37,9 @@ services:
     # image: sarjis-web:latest
     build:
       dockerfile: web/Dockerfile
+      context: .
+      args:
+        - WEB_PATH=web
     container_name: nginx
     volumes:
       - ./application/static:/var/www/static

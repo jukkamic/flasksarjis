@@ -3,7 +3,6 @@
 **TODO**
 
 - There is no dev or prod environments. The configuration is hardcoded into app.py (DevelopmentConfig)
-- docker-compose build does not work. Build scripts must be run individually for each container
 - Some comics get caught up in some errors
 - Set your specific AWS and Azure configurations in (env) config
 
@@ -34,15 +33,15 @@ python -m flask run --host=localhost --port=8000
 
 (Optional: Set the environment variable FLASK_ENV for development or production environment)
 
-## Docker in localhost
-
-Build the UI
+## Build the UI for localhost
 
 ```bash
 ng build --configuration development
 ```
 
-Run the **build.sh** scripts in **db/** and **web/** and run **build-service.sh** in project root.
+## Docker in localhost
+
+Run **docker-compose build**, or for individual builds run the **build.sh** scripts in **db/** and **web/** and run **build-service.sh** in project root.
 
 Run **docker-compose up** in project root.
 

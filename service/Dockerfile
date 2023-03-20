@@ -1,9 +1,12 @@
 FROM twobulls/gunicorn-bootstrap
 
+# By default SERVICE_PATH is set because build is run from project root
+ARG SERVICE_PATH=service
+
 WORKDIR /appplication
 
 COPY requirements.txt .
-COPY service/buildspec.yml .
+COPY ${SERVICE_PATH}/buildspec.yml .
 
 RUN pip install -r requirements.txt
 
