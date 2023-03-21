@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Build the Docker image
-docker build -t sarjis-service:latest -f service/Dockerfile .
+docker build -t sarjis-service:latest -f service/Dockerfile . $1
 
 if [ "$1" == "az" ]; then
     echo "tag for azure"

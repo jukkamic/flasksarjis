@@ -2,13 +2,12 @@
 
 **TODO**
 
-- There is no dev or prod environments. The configuration is hardcoded into app.py (DevelopmentConfig)
-- Some comics get caught up in some errors
-- Set your specific AWS and Azure configurations in (env) config
+- There are no dev or prod environments. The configuration is hardcoded into app.py (DevelopmentConfig)
+- Ability to set your specific AWS and Azure configurations in (env) config
 
 **Prerequisites**
 
-Have Python installed and your virtualenv activated
+Have your virtualenv activated.
 
 *Visual Studio Code:* **Ctrl + Shift + P** and type *python select interpreter* to select your virtualenv interpreter.
 
@@ -31,7 +30,7 @@ and run
 python -m flask run --host=localhost --port=8000
 ```
 
-(Optional: Set the environment variable FLASK_ENV for development or production environment)
+(Optional: Set the environment variable FLASK_ENV for development or production profile)
 
 ## Build the UI for localhost
 

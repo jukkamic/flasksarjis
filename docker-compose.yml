@@ -1,5 +1,9 @@
 version: '3.1'
 
+volumes:
+  static-data:
+    #    external: true
+
 services:
   database:
     # image: sarjis-db:latest
@@ -24,7 +28,7 @@ services:
       args:
         - SERVICE_PATH=service
     volumes:
-      - ./application/static:/application/static
+      - static-data:/application/application/static
     container_name: sarjis
     ports:
       - 8000:8000
@@ -44,7 +48,7 @@ services:
         - WEB_PATH=web
     container_name: nginx
     volumes:
-      - ./application/static:/var/www/static
+      - static-data:/var/www/shared/static/
       - ./ui/dist/ui:/var/www
       - ./web/nginx-default.conf:/etc/nginx/conf.d/default.conf
     ports:
