@@ -5,4 +5,4 @@ FROM nginx:1.23.3
 ARG WEB_PATH
 
 COPY ${WEB_PATH}/nginx-default.conf /etc/nginx/conf.d/default.conf
-COPY ${WEB_PATH}/buildspec.yml .
+COPY ${WEB_PATH}/buildspec.yml /buildspec.yml

@@ -32,6 +32,10 @@ class Comic(db.Model):
             #     self.id = comic_json[key]
             # if key == 'next_id':
             #     self.next_id = comic_json[key]
+            if key == 'id':
+                self.id = comic_json[key]
+            if key == 'next_id':
+                self.next_id = comic_json[key]
             if key == 'name':
                 self.name = comic_json[key]
             if key == 'display_name':
@@ -60,11 +64,11 @@ class Comic(db.Model):
             'img_file': self.img_file,
         }
 
-    # def __repr__(self) -> str:
-    #     return f"Comic(id={self.id!r}, next_id={self.next_id!r}, name={self.name!r}, display_name={self.display_name!r})"
+    def __repr__(self) -> str:
+        return f"Comic(id={self.id!r}, next_id={self.next_id!r}, name={self.name!r}, display_name={self.display_name!r})"
     
-    # def as_dict(self):
-    #     return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
     @classmethod
     def get_comic_by_id(cls, id):

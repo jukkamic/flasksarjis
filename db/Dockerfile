@@ -5,10 +5,11 @@ FROM postgres:alpine3.17
 ARG DB_PATH
 ARG postgres_password
 
+COPY ${DB_PATH}/buildspec.yml /buildspec.yml
+
 WORKDIR /application
 
 ENV POSTGRES_PASSWORD=${postgres_password}
 
 EXPOSE 5432:5432
 
-COPY ${DB_PATH}/buildspec.yml .
